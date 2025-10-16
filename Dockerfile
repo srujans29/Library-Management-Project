@@ -1,10 +1,17 @@
-FROM node:18-alpine 
+FROM node:18
+ 
+# Set working directory
 WORKDIR /app
+ 
+# Copy package files and install dependencies
 COPY package*.json ./
 RUN npm install
+ 
+# Copy the rest of the app
 COPY . .
-
-ENV PORT=5000
-ENV MONGO_URI=mongodb://mongo:27017/librarydb
-EXPOSE 5000
-CMD [ "npm","start" ] 
+ 
+# Expose backend port
+EXPOSE 3000
+ 
+# Start the server
+CMD ["node", "server.js"]
