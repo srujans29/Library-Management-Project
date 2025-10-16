@@ -1,11 +1,10 @@
-FROM node:18-alpine AS build
+FROM node:18-alpine 
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci 
+RUN npm install
 COPY . .
 
-FROM node:18-alpine
-WORKDIR /app
-COPY --from=build /app .
-EXPOSE 3000
-CMD [ "node","server.js" ] 
+ENV PORT=5000
+ENV MONGO_URI=mongodb://mongo:27017/librarydb
+EXPOSE 5000
+CMD [ "npm","start" ] 
