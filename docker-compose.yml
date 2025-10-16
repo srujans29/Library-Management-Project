@@ -8,19 +8,18 @@ services:
       - "3001:3000"
     environment:
       - MONGO_URI=mongodb://mongodb:27017/test
-      - ENABLE_JOBS=false  # Toggle to true to enable scheduled jobs
+      - ENABLE_JOBS=false
     depends_on:
       - mongodb
     volumes:
-      - .:/app  # Optional: live code sync for faster dev
- 
+      - .:/app
+
   mongodb:
     image: mongo:6
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
- 
+
 volumes:
   mongo-data:
- 
